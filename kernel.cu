@@ -5,7 +5,7 @@
 #include <time.h> // 
 #include <intrin.h> //
 
-#define N 32
+#define N 1024
 #define BLOCK_SIZE 16
 
 
