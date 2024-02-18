@@ -161,6 +161,9 @@ int main() {
 	dim3 threads(BLOCK_SIZE, BLOCK_SIZE);
 	dim3 blocks((N + threads.x - 1) / threads.x, (N + threads.y - 1) / threads.y);
 
+
+	cudaEventRecord(startTimerGPU);
+
 	cudaMalloc((void**)&adev, numBytes);
 	cudaMalloc((void**)&determinant_device, sizeof(long double));
 
@@ -169,8 +172,6 @@ int main() {
 
 	//Mykernel << <blocks, threads >> > (adev, 0, N);	
 	// Запуск для каждого столбца под главной диагональю
-
-	cudaEventRecord(startTimerGPU);
 
 	for (int i = 0; i < N - 1; i++) {
 		Mykernel <<< blocks, threads >>> (adev, i, determinant_device, N);
